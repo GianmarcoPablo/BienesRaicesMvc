@@ -16,7 +16,7 @@ export class AuthController {
             const validPassword = await HashPassword.compare(password, usuario.password)
             if (!validPassword) return res.status(400).json({ msg: "La contraseña es incorrecta" })
 
-            const token = await new JwtAdapter(process.env.JWT_SEED || "").sign({ id: usuario.id })
+            const token = await new JwtAdapter(process.env.JWT_SEED || "").generarToken({ id: usuario.id })
             return res.status(200).json({ usuario, token })
         } catch (error) {
 
@@ -24,7 +24,7 @@ export class AuthController {
     }
 
     static async register(req: Request, res: Response) {
-        const { nombre, correo, apellido, password, rol } = req.body
+        const { nombre, correo, apellido, password, rol, experiencia, especialidad, ubicacion, numeroContacto } = req.body
         if (!nombre || !correo || !apellido || !password || !rol) return res.status(400).json({ msg: "Todos los campos son obligatorios" })
 
         try {
@@ -44,21 +44,24 @@ export class AuthController {
             }
 
             if (usuario.rol === "Agente") {
+                if (!experiencia || !especialidad || !ubicacion || !numeroContacto) return res.status(400).json({ msg: "Todos los campos son obligatorios" })
                 await prisma.agenteInmobiliario.create({
                     data: {
                         calificacion: 0,
-                        especialidad: "",
-                        experiencia: 4,
-                        numeroContacto: "",
-                        ubicacion: "",
-                        idUsuario: usuario.id,
+                        especialidad,
+                        experiencia,
+                        numeroContacto,
+                        ubicacion,
+                        idUsuario: usuario.id
                     }
                 })
             }
             if (usuario.rol === "Moderador") {
                 await prisma.moderador.create({
                     data: {
-                        idUsuario: usuario.id
+                        idUsuario: usuario.id,
+                        contenidoRevisado: [],
+                        reportesPendientes: []
                     }
                 })
             }
@@ -66,12 +69,15 @@ export class AuthController {
             if (usuario.rol === "Administrador") {
                 await prisma.administrador.create({
                     data: {
-                        idUsuario: usuario.id
+                        idUsuario: usuario.id,
+                        usuariosGestionados: [],
+                        contenidoGestionado: [],
+                        configuracionesSitio: []
                     }
                 })
             }
 
-            const token = await new JwtAdapter(process.env.JWT_SEED || "").sign({ id: usuario.id })
+            const token = await new JwtAdapter(process.env.JWT_SEED || "").generarToken({ id: usuario.id })
             return res.status(200).json({ usuario, token })
         } catch (error) {
             console.log(error)

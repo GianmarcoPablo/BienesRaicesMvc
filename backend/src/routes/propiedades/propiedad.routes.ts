@@ -8,11 +8,11 @@ export class PropiedadesRoutes {
     static get routes(): Router {
         const router = Router()
 
-        router.get("/", PropiedadController.getPropiedades)
-        router.get("/:id", [AuthMiddleware.verify], PropiedadController.getPropiedad)
+        router.get("/", [AuthMiddleware.verify, PropiedadesMiddleware.tienePermisos], PropiedadController.getPropiedades)
+        router.get("/:id", [AuthMiddleware.verify, PropiedadesMiddleware.tienePermisos], PropiedadController.getPropiedad)
         router.post("/", [AuthMiddleware.verify, PropiedadesMiddleware.tienePermisos], PropiedadController.createPropiedad)
         router.put("/:id", [AuthMiddleware.verify], PropiedadController.updatePropiedad)
-        router.delete("/:id", [AuthMiddleware.verify], PropiedadController.deletePropiedad)
+        router.delete("/:id", [AuthMiddleware.verify, PropiedadesMiddleware.tienePermisos], PropiedadController.deletePropiedad)
 
         return router
     }
