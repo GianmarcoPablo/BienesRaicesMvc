@@ -11,7 +11,7 @@ export class PropiedadesRoutes {
         router.get("/", [AuthMiddleware.verify, PropiedadesMiddleware.tienePermisos], PropiedadController.getPropiedades)
         router.get("/:id", [AuthMiddleware.verify, PropiedadesMiddleware.tienePermisos], PropiedadController.getPropiedad)
         router.post("/", [AuthMiddleware.verify, PropiedadesMiddleware.tienePermisos], PropiedadController.createPropiedad)
-        router.put("/:id", [AuthMiddleware.verify], PropiedadController.updatePropiedad)
+        router.put("/:id", [AuthMiddleware.verify, PropiedadesMiddleware.tienePermisos], PropiedadController.updatePropiedad)
         router.delete("/:id", [AuthMiddleware.verify, PropiedadesMiddleware.tienePermisos], PropiedadController.deletePropiedad)
 
         return router
