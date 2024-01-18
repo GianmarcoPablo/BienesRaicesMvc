@@ -1,6 +1,8 @@
-
+import { Outlet } from "react-router-dom"
 export default function AgenteLayout() {
     return (
-        <div>AgenteLayout</div>
+        <div>
+            <Outlet />
+        </div>
     )
 }
