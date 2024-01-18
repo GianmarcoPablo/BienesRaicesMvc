@@ -9,6 +9,7 @@ export class AgenteRoutes {
 
         router.get("/mi-perfil", [AuthMiddleware.verify, AgenteMiddleware.tienePermisos], AgenteController.MiPerfil)
         router.put("/actualizar-perfil", [AuthMiddleware.verify, AgenteMiddleware.tienePermisos], AgenteController.ActualizarPerfil)
+        
         return router
     }
 }

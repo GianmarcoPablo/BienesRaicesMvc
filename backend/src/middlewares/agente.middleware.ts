@@ -16,14 +16,13 @@ export class AgenteMiddleware {
     static async tienePermisos(req: Request, res: Response, next: NextFunction) {
         const { user } = req.body
         try {
-            if (user.rol !== "Agente") throw CustomError.unauthorized("No tiene permisos para realizar esta acción")
+            if (user.rol !== "AgenteInmobiliario") throw CustomError.unauthorized("No tiene permisos para realizar esta acción")
 
             const usuario = await prisma.agenteInmobiliario.findUnique({
                 where: {
                     idUsuario: user.id
                 }
             })
-            console.log(usuario)
 
             if (!usuario) throw CustomError.notFound("Usuario no encontrado")
 

@@ -10,14 +10,9 @@ export class NormalUserRoutes {
 
         router.put("/actualizar-perfil", [AuthMiddleware.verify, NormalUserMiddleware.tienePermisos], NormalUserController.ActualizarPerfil)
 
-        router.post("/propiedad/favorita", [AuthMiddleware.verify, NormalUserMiddleware.tienePermisos], NormalUserController.agregarPropiedadFavorita)
+        router.post("/casa/agregar-favorito", [AuthMiddleware.verify, NormalUserMiddleware.tienePermisos], NormalUserController.AgregarCasaFavorito)
 
-        router.delete("/propiedad/favorita", [AuthMiddleware.verify, NormalUserMiddleware.tienePermisos], NormalUserController.eliminarPropiedadFavorita)
-
-        router.get("/propiedad/favorita", [AuthMiddleware.verify, NormalUserMiddleware.tienePermisos], NormalUserController.listarPropiedadesFavoritas)
-
-
-
+        router.post("/apartamento/agregar-favorito", [AuthMiddleware.verify, NormalUserMiddleware.tienePermisos], NormalUserController.AgregarApartamentoFavorito)
         return router
     }
 }

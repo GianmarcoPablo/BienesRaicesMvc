@@ -35,12 +35,12 @@ export class AgenteController {
 
     static async ActualizarPerfil(req: Request, res: Response) {
         const { id } = req.body.usuario
-        const { nombre, apellido, correo, password, numeroContacto, calificacion, ubicacion, especialidad, experiencia } = req.body
+        const { nombre, apellido, correo, password, numeroContacto, calificacion, ubicacion, especialidad, experiencia, web } = req.body
 
         try {
             await prisma.agenteInmobiliario.update({
                 where: {
-                    id: id
+                    id
                 },
                 data: {
                     usuario: {
@@ -48,11 +48,12 @@ export class AgenteController {
                             nombre,
                             apellido,
                             correo,
-                            password
+                            password,
+                            numeroContacto,
                         }
                     },
-                    numeroContacto,
                     calificacion,
+                    web,
                     ubicacion,
                     especialidad,
                     experiencia
