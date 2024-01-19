@@ -56,44 +56,17 @@ export class CrearCasaDto {
     ) { }
 
     static create(props: { [key: string]: any }): [string?, CrearCasaDto?] {
-        const { tipo, ubicacion, precio, superficie, habitaciones, bathrooms, estado, antiguedad, fotos, tipoTransaccion, fechaPublicacion, descripcion, ascensor, seguridad, piscina, cocina, parqueadero, jardin, amoblado, balcon, terraza, calefaccion, numPisos } = props
+        const { tipo, ubicacion, precio, superficie, habitaciones, bathrooms, estado, antiguedad, fotos, tipoTransaccion, fechaPublicacion, numPisos, descripcion, ascensor, seguridad, piscina, cocina, parqueadero, jardin, amoblado, balcon, terraza, calefaccion } = props;
 
-        if (!tipo) return ["El tipo de propiedad es requerido"]
-        if (!ubicacion) return ["La ubicación es requerida"]
-        if (!precio) return ["El precio es requerido"]
-        if (!superficie) return ["La superficie es requerida"]
-        if (!habitaciones) return ["El número de habitaciones es requerido"]
-        if (!bathrooms) return ["El número de baños es requerido"]
-        if (!estado) return ["El estado es requerido"]
-        if (!antiguedad) return ["La antiguedad es requerida"]
+        if (!tipo) return ["Tipo de propiedad es requerido"];
+        if (!ubicacion) return ["Ubicación es requerida"];
+        if (!precio) return ["Precio es requerido"];
+        if (!superficie) return ["Superficie es requerida"];
+        if (!habitaciones) return ["Habitaciones es requerido"];
+        if (!bathrooms) return ["Baños es requerido"];
+        if (!estado) return ["Estado es requerido"];
+        if (!antiguedad) return ["Antiguedad es requerida"];
 
-        return [
-            undefined,
-            new CrearCasaDto(
-                tipo,
-                ubicacion,
-                precio,
-                superficie,
-                habitaciones,
-                bathrooms,
-                estado,
-                antiguedad,
-                fotos,
-                tipoTransaccion,
-                fechaPublicacion,
-                numPisos,
-                descripcion,
-                ascensor,
-                seguridad,
-                piscina,
-                cocina,
-                parqueadero,
-                jardin,
-                amoblado,
-                balcon,
-                terraza,
-                calefaccion,
-            ),
-        ]
+        return [undefined, new CrearCasaDto(tipo, ubicacion, precio, superficie, habitaciones, bathrooms, estado, antiguedad, fotos, tipoTransaccion, fechaPublicacion, numPisos, descripcion, ascensor, seguridad, piscina, cocina, parqueadero, jardin, amoblado, balcon, terraza, calefaccion)];
     }
 }

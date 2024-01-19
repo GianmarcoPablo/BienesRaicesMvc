@@ -24,9 +24,15 @@ export class Server {
 
     public async start() {
 
-        this.app.use(cors())
-        this.app.use(express.json())
+        this.app.use(cors({
+            origin: 'http://localhost:5173',
+            credentials: true,
+        }))
+
         this.app.use(express.urlencoded({ extended: true }))
+        this.app.use(express.json())
+        this.app.use(express.text())
+        this.app.use(express.raw())
         this.app.use(express.static(this.publicPath))
 
         this.app.use(this.routes)

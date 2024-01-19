@@ -16,7 +16,7 @@ type State = {
     token: string,
     perfil: Profile,
     isAuth: StatusAuth,
-    rol: UserRole
+    rol: UserRole,
 }
 
 type Actions = {
@@ -24,7 +24,6 @@ type Actions = {
     setProfile: (profile: Profile) => void,
     setRole: (role: UserRole) => void,
     logout: () => void,
-    checking: () => void
 }
 
 export const useAuthStore = create(persist<State & Actions>((set) => ({
@@ -33,18 +32,24 @@ export const useAuthStore = create(persist<State & Actions>((set) => ({
     isAuth: "not-authenticated",
     rol: null,
 
+
     setToken: (token: string) => set(() => ({
+        checking() {
+            return "checking"
+        },
         token,
-        isAuth: "checking"
+        isAuth: "authenticated",
     })),
 
     setProfile: (perfil: Profile) => set((state) => ({
+
         perfil,
         isAuth: state.token ? "authenticated" : "not-authenticated",
     })),
 
     setRole: (rol: UserRole) => set(() => ({
-        rol
+
+        rol,
     })),
 
     logout: () => set(() => ({
@@ -54,9 +59,7 @@ export const useAuthStore = create(persist<State & Actions>((set) => ({
         rol: null
     })),
 
-    checking: () => set(() => ({
-        isAuth: "checking"
-    }))
+
 
 }), {
     name: "auth-storage-persist"

@@ -19,9 +19,8 @@ export class AuthController {
 
     static async login(req: Request, res: Response) {
         const { correo, password } = req.body
-
-        if (!correo || !password) throw CustomError.badRequest("Todos los campos son obligatorios")
         try {
+            if (!correo || !password) throw CustomError.badRequest("Todos los campos son obligatorios")
             const usuario = await prisma.usuario.findUnique({ where: { correo } })
             if (!usuario) throw CustomError.notFound("El usuario no existe")
 
@@ -45,7 +44,9 @@ export class AuthController {
             if (existeUsuario) throw CustomError.conflict("El usuario ya existe")
             const hash = await HashPassword.hash(password)
             const rolesValidos = ["Usuario", "AgenteInmobiliario", "Moderador", "Administrador"]
-            if (!rolesValidos.includes(rol)) throw CustomError.badRequest("El rol no es válido")
+            if (!rolesValidos.includes(rol)) {
+                throw CustomError.badRequest("El rol no es válido")
+            }
             const usuario = await prisma.usuario.create({
                 data: {
                     nombre: nombre,
