@@ -67,6 +67,7 @@ export class CrearCasaDto {
         if (!estado) return ["Estado es requerido"];
         if (!antiguedad) return ["Antiguedad es requerida"];
 
+
         return [undefined, new CrearCasaDto(tipo, ubicacion, precio, superficie, habitaciones, bathrooms, estado, antiguedad, fotos, tipoTransaccion, fechaPublicacion, numPisos, descripcion, ascensor, seguridad, piscina, cocina, parqueadero, jardin, amoblado, balcon, terraza, calefaccion)];
     }
 }

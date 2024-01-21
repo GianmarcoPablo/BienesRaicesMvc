@@ -1,12 +1,17 @@
+import HeroSection from "../components/HeroSection";
 
-
-
+import Marcas from "../components/Marcas";
 
 
 export default function HomePage() {
     return (
         <>
-            <h1>home</h1>
+            <section>
+                <HeroSection />
+            </section>
+            <div>
+                <Marcas />
+            </div>
         </>
-    )
+    );
 }

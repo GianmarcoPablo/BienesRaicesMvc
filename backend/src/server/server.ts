@@ -1,6 +1,9 @@
 import express, { Router } from "express";
 import cors from "cors"
 import path from "path";
+import fileUpload from "express-fileupload"
+import { v4 as uuidv4 } from 'uuid'; // Para generar nombres de archivo únicos
+
 
 interface Properties {
     port: number
@@ -29,10 +32,9 @@ export class Server {
             credentials: true,
         }))
 
-        this.app.use(express.urlencoded({ extended: true }))
         this.app.use(express.json())
-        this.app.use(express.text())
-        this.app.use(express.raw())
+        this.app.use(express.urlencoded({ extended: true }))
+        this.app.use(fileUpload())
         this.app.use(express.static(this.publicPath))
 
         this.app.use(this.routes)
