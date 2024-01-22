@@ -22,7 +22,7 @@ export default function Navbar() {
     const { isAuth } = useAuthStore()
 
     return (
-        <Disclosure as="nav" className="bg-white py-2 ">
+        <Disclosure as="nav" className="bg-white">
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2  sm:px-6 lg:px-8">

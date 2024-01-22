@@ -5,9 +5,6 @@ export default function formatarFecha(fechaISO: string): string {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
         timeZone: 'UTC',
     };
 

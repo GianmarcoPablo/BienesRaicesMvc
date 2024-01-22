@@ -56,17 +56,56 @@ interface Casa {
 export default function CasaAgentePage() {
 
     const [casas, setCasas] = useState<ApiResponse["casas"]>([])
+    const [loading, setLoading] = useState(false)
 
     const obtenerCasas = async () => {
-        const { data } = await instance.get('/casa')
-        setCasas(data.casas)
+        try {
+            setLoading(true)
+            const { data } = await instance.get('/casa')
+            setCasas(data.casas)
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+        }
     }
+
+    console.log(casas)
 
     useEffect(() => {
         obtenerCasas()
     }, [])
 
-    console.log(casas)
+
+    if (loading) return (
+        //skeleton
+        <div className="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2 gap-4 p-4">
+            {Array(6).fill(1).map((_, i) => (
+                <div
+                    key={i}
+                    className="animate-pulse rounded shadow-lg flex flex-col justify-between">
+                    <div className="w-full h-56 bg-gray-300"></div>
+                    <div className="flex justify-between p-2 items-center">
+                        <div className="w-1/2 h-4 bg-gray-300"></div>
+                        <div className="w-8 h-4 bg-gray-300"></div>
+                    </div>
+                    <div className="flex justify-between p-2 items-center">
+                        <div className="w-1/2 h-4 bg-gray-300"></div>
+                        <div className="w-8 h-4 bg-gray-300"></div>
+                    </div>
+                    <div className="flex justify-between p-2 items-center">
+                        <div className="w-1/2 h-4 bg-gray-300"></div>
+                        <div className="w-8 h-4 bg-gray-300"></div>
+                    </div>
+                    <div className="flex justify-between p-2 items-center">
+                        <div className="w-1/2 h-4 bg-gray-300"></div>
+                        <div className="w-8 h-4 bg-gray-300"></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    )
 
     return (
         <div>
@@ -80,47 +119,48 @@ export default function CasaAgentePage() {
             </nav>
 
             <div className="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2 gap-4 p-4">
-                {casas.map((casa) => (
-                    <div key={casa.id} className="rounded shadow-lg flex flex-col justify-between">
-                        <img
-                            className="w-full h-56 object-cover"
-                            src={`http://localhost:4000/${casa.fotos[0]}`}
-                            alt="Sunset in the mountains" />
+                <>
+                    {casas.map((casa) => (
+                        <div key={casa.id} className="rounded shadow-lg flex flex-col justify-between">
+                            <img
+                                className="w-full h-56 object-cover"
+                                src={`http://localhost:4000/${casa.fotos[0]}`}
+                                alt="Sunset in the mountains" />
 
-                        {/* Contenido de la tarjeta */}
-                        <div className="flex justify-between p-2 items-center">
-                            <p>
-                                Creacion: <span className="text-rose-700 font-bold">{formatarFecha(casa.fechaPublicacion)}</span>
-                            </p>
-                            <div className="w-8">
-                                <Fecha />
+                            <div className="flex justify-between p-2 items-center">
+                                <p>
+                                    Creacion: <span className="text-rose-700 font-bold">{formatarFecha(casa.fechaPublicacion)}</span>
+                                </p>
+                                <div className="w-8">
+                                    <Fecha />
+                                </div>
+                            </div>
+                            <div className="flex justify-between p-2 items-center">
+                                <p>
+                                    Localizacion: <span className="text-rose-700 font-bold">{casa.ubicacion}</span>
+                                </p>
+                                <div className="w-8">
+                                    <Location />
+                                </div>
+                            </div>
+                            <div className="flex justify-between p-2 items-center">
+                                <p>
+                                    Tipo de transaccion: <span className="text-rose-700 font-bold">{casa.tipoTransaccion}</span>
+                                </p>
+                                <div className="w-8">{casa.tipoTransaccion === "Venta" ? <Venta /> : <Alquiler />}</div>
+                            </div>
+                            <div>
+                                <Link
+                                    to={`/agente/casa/${casa.id}`}
+                                    className="bg-blue-500 text-center hover:bg-blue-700 text-white font-bold py-2 flex w-full rounded mx-auto justify-center"
+                                >
+                                    Ver Casa
+                                </Link>
                             </div>
                         </div>
-                        <div className="flex justify-between p-2 items-center">
-                            <p>
-                                Localizacion: <span className="text-rose-700 font-bold">{casa.ubicacion}</span>
-                            </p>
-                            <div className="w-8">
-                                <Location />
-                            </div>
-                        </div>
-                        <div className="flex justify-between p-2 items-center">
-                            <p>
-                                Tipo de transaccion: <span className="text-rose-700 font-bold">{casa.tipoTransaccion}</span>
-                            </p>
-                            <div className="w-8">{casa.tipoTransaccion === "Venta" ? <Venta /> : <Alquiler />}</div>
-                        </div>
-                        <div>
-                            <Link
-                                to={`/agente/casa/${casa.id}`}
-                                className="bg-blue-500 text-center hover:bg-blue-700 text-white font-bold py-2 flex w-full rounded mx-auto justify-center"
-                            >
-                                Ver Casa
-                            </Link>
-                        </div>
-                    </div>
-                ))}
+                    ))}
+                </>
             </div>
-        </div>
+        </div >
     )
 }

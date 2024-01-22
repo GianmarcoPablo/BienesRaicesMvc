@@ -27,7 +27,7 @@ export class CasaController {
     static async getCasas(req: Request, res: Response) {
 
         const { agente, usuarioCreador } = req.body
-        const { limit = 5, page = 1 } = req.query as PaginacionParams
+        const { limit = 6, page = 1 } = req.query as PaginacionParams
         const offset = (page - 1) * limit
         try {
             const [casas, totalCasas] = await Promise.all([
