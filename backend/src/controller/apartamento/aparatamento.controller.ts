@@ -52,6 +52,14 @@ export class ApartamentoController {
 
     static async getApartamento(req: Request, res: Response) {
         const {id} = req.params
+        try {
+            const apartamento = await prisma.apartamento({where:{
+                id: id
+            }})
+            return apartamento
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     static async createApartamento(req: Request, res: Response) {
@@ -143,6 +151,19 @@ export class ApartamentoController {
     }
 
     static async deleteApartamento(req: Request, res: Response) {
+        const {id } =req.params
+
+        try {
+            const mensaje = await prisma.apartamento.delete({where:id})
+
+            if(mensaje === undefined){
+                return CustomError.badRequest("No llego ninguna informacion a la base de datos")
+            }
+
+            return mensaje    
+        } catch (error) {
+            return ApartamentoController.handleError(error,res)
+        }
     }
 
 

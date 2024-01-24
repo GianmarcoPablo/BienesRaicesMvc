@@ -9,6 +9,11 @@ export default function CrearLocalPage() {
 
     const handleSubmit = (e: any) => {
         e.preventDefualt()
+        try {
+            //Todo : peticion a la api con form data para agregar imagnees
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const heandleImages = () => {
