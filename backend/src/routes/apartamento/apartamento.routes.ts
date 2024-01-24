@@ -9,7 +9,7 @@ export class ApartamentoRoutes {
         const router = Router()
 
         router.get("/", [AuthMiddleware.verify, CrearMiddleware.Comprobar], ApartamentoController.getApartamentos)
-        router.get("/:id", ApartamentoController.getApartamento)
+        router.get("/:id",[AuthMiddleware.verify, CrearMiddleware.Comprobar] ,ApartamentoController.getApartamento)
         router.post("/", [AuthMiddleware.verify, CrearMiddleware.Comprobar], ApartamentoController.createApartamento)
         router.put("/:id", [AuthMiddleware.verify], ApartamentoController.updateApartamento)
 

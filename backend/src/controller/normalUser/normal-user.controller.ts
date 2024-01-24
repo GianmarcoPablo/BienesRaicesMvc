@@ -122,5 +122,11 @@ export class NormalUserController {
         }
     }
 
+    static async AgregarTerrenoFavorito(req: Request, res: Response) {
 
+    }
+
+    static async AgregarLocalFavorito(req: Request, res: Response) {
+
+    }
 }

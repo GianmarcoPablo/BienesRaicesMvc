@@ -51,6 +51,7 @@ export class ApartamentoController {
     }
 
     static async getApartamento(req: Request, res: Response) {
+        const {id} = req.params
     }
 
     static async createApartamento(req: Request, res: Response) {
