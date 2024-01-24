@@ -111,26 +111,26 @@ export default function ApartamentoAgentePage() {
         <div>
             <nav className="flex items-center justify-end flex-wrap p-6">
                 <Link
-                    to="/agente/casas/create"
+                    to="/agente/apartamento/create"
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 >
-                    Crear Casa
+                    Crear Aparamnto
                 </Link>
             </nav>
 
             <div className="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2 gap-4 p-4">
                 <>
-                    {apartamentos?.map((casa) => (
-                        <div key={casa.id} className="rounded shadow-lg flex flex-col justify-between">
+                    {apartamentos?.map((apartamento) => (
+                        <div key={apartamento.id} className="rounded shadow-lg flex flex-col justify-between">
                             <img
                                 className="w-full h-56 object-cover"
-                                src={`http://localhost:4000/${casa.fotos[0]}`}
+                                src={`http://localhost:4000/${apartamento.fotos[0]}`}
                                 alt="Sunset in the mountains" />
 
                             {/* Contenido de la tarjeta */}
                             <div className="flex justify-between p-2 items-center">
                                 <p>
-                                    Creacion: <span className="text-rose-700 font-bold">{formatarFecha(casa.fechaPublicacion)}</span>
+                                    Creacion: <span className="text-rose-700 font-bold">{formatarFecha(apartamento.fechaPublicacion)}</span>
                                 </p>
                                 <div className="w-8">
                                     <Fecha />
@@ -138,7 +138,7 @@ export default function ApartamentoAgentePage() {
                             </div>
                             <div className="flex justify-between p-2 items-center">
                                 <p>
-                                    Localizacion: <span className="text-rose-700 font-bold">{casa.ubicacion}</span>
+                                    Localizacion: <span className="text-rose-700 font-bold">{apartamento.ubicacion}</span>
                                 </p>
                                 <div className="w-8">
                                     <Location />
@@ -146,16 +146,16 @@ export default function ApartamentoAgentePage() {
                             </div>
                             <div className="flex justify-between p-2 items-center">
                                 <p>
-                                    Tipo de transaccion: <span className="text-rose-700 font-bold">{casa.tipoTransaccion}</span>
+                                    Tipo de transaccion: <span className="text-rose-700 font-bold">{apartamento.tipoTransaccion}</span>
                                 </p>
-                                <div className="w-8">{casa.tipoTransaccion === "Venta" ? <Venta /> : <Alquiler />}</div>
+                                <div className="w-8">{apartamento.tipoTransaccion === "Venta" ? <Venta /> : <Alquiler />}</div>
                             </div>
                             <div>
                                 <Link
-                                    to={`/agente/casa/${casa.id}`}
+                                    to={`/agente/apartamento/${apartamento.id}`}
                                     className="bg-blue-500 text-center hover:bg-blue-700 text-white font-bold py-2 flex w-full rounded mx-auto justify-center"
                                 >
-                                    Ver Casa
+                                    Ver Apartamento
                                 </Link>
                             </div>
                         </div>
