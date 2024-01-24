@@ -57,13 +57,18 @@ export default function CasaAgentePage() {
 
     const [casas, setCasas] = useState<ApiResponse["casas"]>([])
     const [loading, setLoading] = useState(false)
+    const [page, setPage] = useState(1)
+    const [totalCasas, setTotalCasas] = useState(0)
+
+    const limit: number = 6;
 
     const obtenerCasas = async () => {
         try {
-            setLoading(true)
-            const { data } = await instance.get('/casa')
-            setCasas(data.casas)
-            console.log(data)
+            const url = `/casa?page=${page}&limit=${limit}`
+            setLoading(true);
+            const { data } = await instance.get(url);
+            setCasas(data.casas);
+            setTotalCasas(data.totalCasas);
         } catch (error) {
             console.log(error)
         } finally {
@@ -71,11 +76,27 @@ export default function CasaAgentePage() {
         }
     }
 
-    console.log(casas)
+
 
     useEffect(() => {
         obtenerCasas()
-    }, [])
+    }, [page])
+
+
+
+    function prevPage() {
+        if (page > 1) {
+            setPage(page - 1);
+        }
+    }
+
+    function nextPage() {
+        if (casas.length === limit) {
+            setPage(page + 1);
+        }
+    }
+
+    console.log(casas)
 
 
     if (loading) return (
@@ -108,19 +129,27 @@ export default function CasaAgentePage() {
     )
 
     return (
-        <div>
-            <nav className="flex items-center justify-end flex-wrap p-6">
+        <div className="mb-8">
+            <div className="flex items-center justify-between flex-wrap p-6 bg-slate-950">
+                <p className="text-white text-2xl">Total de casas: <span className="text-rose-500 font-bold">{totalCasas}</span></p>
+                <p className="text-white text-2xl">
+                    Casas en venta: <span className="text-rose-500 font-bold">{casas?.filter(casa => casa.tipoTransaccion === "Venta").length}</span>
+                </p>
+                <p className="text-white text-2xl">
+                    Casas en alquiler: <span className="text-rose-500 font-bold">{casas?.filter(casa => casa.tipoTransaccion === "Alquiler").length}</span>
+                </p>
+
                 <Link
                     to="/agente/casas/create"
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    className="bg-rose-800 hover:bg-rose-900 text-white font-bold py-2 px-4 rounded"
                 >
                     Crear Casa
                 </Link>
-            </nav>
+            </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2 gap-4 p-4">
                 <>
-                    {casas.map((casa) => (
+                    {casas?.map((casa) => (
                         <div key={casa.id} className="rounded shadow-lg flex flex-col justify-between">
                             <img
                                 className="w-full h-56 object-cover"
@@ -160,6 +189,22 @@ export default function CasaAgentePage() {
                         </div>
                     ))}
                 </>
+            </div>
+
+            <div className="flex justify-between items-center">
+                <button
+                    disabled={page === 1}
+                    className={`bg-rose-800 hover:bg-rose-900 text-white font-bold py-2 px-4 rounded ${page === 1 ? "cursor-not-allowed " : ""}`}
+                    onClick={prevPage}
+                >
+                    Anterior
+                </button>
+                <button
+                    className="bg-rose-800 hover:bg-rose-900 text-white font-bold py-2 px-4 rounded"
+                    onClick={nextPage}
+                >
+                    Siguiente
+                </button>
             </div>
         </div >
     )

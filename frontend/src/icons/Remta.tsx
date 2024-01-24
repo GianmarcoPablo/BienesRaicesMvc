@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Alquiler: React.FC = () => {
+const Renta: React.FC = () => {
     return (
         <svg
             viewBox="0 0 24 24"
@@ -29,4 +29,4 @@ const Alquiler: React.FC = () => {
     );
 };
 
-export default Alquiler;
+export default Renta;

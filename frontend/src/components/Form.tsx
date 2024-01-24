@@ -8,7 +8,7 @@ interface FormProps {
 
 export default function Form({ handleSubmit, handleImages, images }: FormProps) {
     return (
-        <form onSubmit={handleSubmit} className=" shadow-xl rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+        <form onSubmit={handleSubmit} className="w-1/2 mx-auto shadow-xl rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
             <div className="-mx-3 md:flex mb-6">
                 <div className="md:w-1/2 px-3 mb-6 md:mb-0">
                     <label htmlFor="grid-first-name" className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">

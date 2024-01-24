@@ -28,12 +28,13 @@ export class CasaController {
 
         const { agente, usuarioCreador } = req.body
         const { limit = 6, page = 1 } = req.query as PaginacionParams
+        const limitNumber = Number(limit)
         const offset = (page - 1) * limit
         try {
             const [casas, totalCasas] = await Promise.all([
                 prisma.casa.findMany({
                     where: { idAgente: agente?.id, idCreador: usuarioCreador?.id },
-                    take: limit,
+                    take: limitNumber,
                     skip: offset,
                     include: {
                         agente: true,
@@ -46,13 +47,14 @@ export class CasaController {
             return res.status(200).json({
                 casas,
                 totalCasas,
-                nextPage: "http://localhost:4000/api/v1/casas?page=" + (Number(page) + 1) + "&limit=" + limit,
-                prevPage: page > 1 ? "http://localhost:4000/api/v1/casas?page=" + (Number(page) - 1) + "&limit=" + limit : "No hay pagina anterior"
+                nextPage: "/casa?page=" + (Number(page) + 1) + "&limit=" + limit,
+                prevPage: page > 1 ? "/casa?page=" + (Number(page) - 1) + "&limit=" + limit : "No hay pagina anterior"
             })
         } catch (error) {
             return CasaController.handleError(error, res)
         }
     }
+
 
     static async getCasa(req: Request, res: Response) {
         const { id } = req.params;
