@@ -1,5 +1,5 @@
 import { SVGProps } from "react"
-const Piscina = (props: SVGProps<SVGSVGElement>) => (
+const Mueble = (props: SVGProps<SVGSVGElement>) => (
     <svg
         width={60}
         xmlns="http://www.w3.org/2000/svg"
@@ -18,14 +18,18 @@ const Piscina = (props: SVGProps<SVGSVGElement>) => (
                 </style>
             </defs>
             <path
-                d="M22.5 14.86v7.64h-21v-7.64h1a3.46 3.46 0 0 0 4.77 0 3.45 3.45 0 0 0 4.76 0 3.45 3.45 0 0 0 4.76 0 3.46 3.46 0 0 0 4.77 0h1ZM7.23 14.86V4.36a2.86 2.86 0 0 1 2.86-2.86"
+                d="M12 8.2v5.73H5.32V12a1 1 0 0 0-1-.95h-1V8.2a2.87 2.87 0 0 1 2.95-2.86h2.87A2.87 2.87 0 0 1 12 8.2Z"
                 className="cls-1"
             />
             <path
-                d="M14.86 15.79V4.36a2.86 2.86 0 0 1 2.87-2.86M7.23 6.27h7.63M7.23 11.05h7.63"
+                d="M21.55 11.07h-1.91a1 1 0 0 0-1 .95v1.91H5.32V12a1 1 0 0 0-1-.95H2.45a1 1 0 0 0-1 .95v5.73h21V12a1 1 0 0 0-.9-.93Z"
+                className="cls-1"
+            />
+            <path
+                d="M20.59 8.2v2.87h-.95a1 1 0 0 0-1 .95v1.91H12V8.2a2.87 2.87 0 0 1 2.86-2.86h2.87a2.87 2.87 0 0 1 2.86 2.86ZM2.45 19.66v-1.91M20.59 19.66v-1.91"
                 className="cls-1"
             />
         </g>
     </svg>
 )
-export default Piscina
+export default Mueble

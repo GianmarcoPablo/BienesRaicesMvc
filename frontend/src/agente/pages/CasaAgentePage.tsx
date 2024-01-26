@@ -147,7 +147,7 @@ export default function CasaAgentePage() {
                 </Link>
             </div>
 
-            <div className="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2 gap-4 p-4">
+            <div className="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2 gap-4 mb-5">
                 <>
                     {casas?.map((casa) => (
                         <div key={casa.id} className="rounded shadow-lg flex flex-col justify-between">
@@ -160,7 +160,7 @@ export default function CasaAgentePage() {
                                 <p>
                                     Creacion: <span className="text-rose-700 font-bold">{formatarFecha(casa.fechaPublicacion)}</span>
                                 </p>
-                                <div className="w-8">
+                                <div className="w-8 flex">
                                     <Fecha />
                                 </div>
                             </div>
@@ -168,7 +168,7 @@ export default function CasaAgentePage() {
                                 <p>
                                     Localizacion: <span className="text-rose-700 font-bold">{casa.ubicacion}</span>
                                 </p>
-                                <div className="w-8">
+                                <div className="w-8 flex ">
                                     <Location />
                                 </div>
                             </div>
@@ -176,12 +176,12 @@ export default function CasaAgentePage() {
                                 <p>
                                     Tipo de transaccion: <span className="text-rose-700 font-bold">{casa.tipoTransaccion}</span>
                                 </p>
-                                <div className="w-8">{casa.tipoTransaccion === "Venta" ? <Venta /> : <Alquiler />}</div>
+                                <div className="w-8 flex">{casa.tipoTransaccion === "Venta" ? <Venta /> : <Alquiler />}</div>
                             </div>
                             <div>
                                 <Link
                                     to={`/agente/casa/${casa.id}`}
-                                    className="bg-blue-500 text-center hover:bg-blue-700 text-white font-bold py-2 flex w-full rounded mx-auto justify-center"
+                                    className="bg-rose-700 text-center hover:bg-rose-800 text-white font-bold py-2 flex w-full rounded mx-auto justify-center"
                                 >
                                     Ver Casa
                                 </Link>

@@ -21,7 +21,15 @@ export class AuthController {
         const { correo, password } = req.body
         try {
             if (!correo || !password) throw CustomError.badRequest("Todos los campos son obligatorios")
-            const usuario = await prisma.usuario.findUnique({ where: { correo } })
+            const usuario = await prisma.usuario.findUnique({
+                where: { correo },
+                include: {
+                    usuarioNormal: true,
+                    agenteInmobiliario: true,
+                    administrador: true,
+                    moderador: true
+                }
+            })
             if (!usuario) throw CustomError.notFound("El usuario no existe")
 
             const validPassword = await HashPassword.compare(password, usuario.password)

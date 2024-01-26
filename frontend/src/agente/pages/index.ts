@@ -11,3 +11,4 @@ export { default as CrearLocalPage } from './CrearLocalPage';
 export { default as TerrenoAgentePage } from './TerrenoAgentePage';
 export { default as CrearTerrenoPage } from './CrearTerrenoPage';
 export { default as TerrenoPage } from './TerrenoPage';
+export { default as EditarCasaPage } from './EditarCasaPage';

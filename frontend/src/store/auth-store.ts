@@ -10,6 +10,10 @@ interface Profile {
     apellido: string,
     rol: string,
     correo: string,
+    administrador?: any,
+    agenteInmobiliario?: any,
+    usuarioNormal?: any,
+    moderador?: any,
 }
 
 type State = {

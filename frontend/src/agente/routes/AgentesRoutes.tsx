@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import AgenteLayout from "../layout/AgenteLayout";
-import { PerfilPage, HomePage, ApartamentoAgentePage, CasaAgentePage, CrearApartamentoPage, CrearCasaPage, CasaPage, LocalAgentePage, CrearLocalPage, LocalPage, TerrenoAgentePage, CrearTerrenoPage, TerrenoPage } from "../pages";
+import { PerfilPage, HomePage, ApartamentoAgentePage, CasaAgentePage, CrearApartamentoPage, CrearCasaPage, CasaPage, LocalAgentePage, CrearLocalPage, LocalPage, TerrenoAgentePage, CrearTerrenoPage, TerrenoPage, EditarCasaPage } from "../pages";
 
 export default function AgentesRoutes() {
     return (
@@ -9,6 +9,7 @@ export default function AgentesRoutes() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/perfil" element={<PerfilPage />} />
                 <Route path="/casas" element={<CasaAgentePage />} />
+                <Route path="/casas/editar/:id" element={<EditarCasaPage />} />
                 <Route path="/casa/:id" element={<CasaPage />} />
                 <Route path="/casas/create" element={<CrearCasaPage />} />
                 <Route path="/apartamento" element={<ApartamentoAgentePage />} />

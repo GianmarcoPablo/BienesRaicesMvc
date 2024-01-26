@@ -3,6 +3,7 @@ import React from 'react';
 const Renta: React.FC = () => {
     return (
         <svg
+            width={60}
             viewBox="0 0 24 24"
             id="Layer_1"
             data-name="Layer 1"

@@ -18,6 +18,33 @@ const UserRoutes = lazy(() => import("../usuario/routes/UsuarioRoutes"));
 // Agent area 
 const AgentRoutes = lazy(() => import("../agente/routes/AgentesRoutes"));
 
+export const Loading = () => {
+    return (
+        <div className="flex justify-center items-center bg-slate-950 h-screen">
+            <svg
+                className="animate-spin -ml-1 mr-3 h-10 w-10 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24">
+                <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                />
+                <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                />
+            </svg>
+        </div>
+    )
+}
+
+
 export default function AppRoutes() {
 
     return (
@@ -33,7 +60,9 @@ export default function AppRoutes() {
             <Route
                 path="auth/*"
                 element={
-                    <React.Suspense fallback="Loading...">
+                    <React.Suspense
+                        fallback={<Loading />}
+                    >
                         <AuthRoutes />
                     </React.Suspense>
                 }
@@ -43,7 +72,9 @@ export default function AppRoutes() {
                 path="usuario/*"
                 element={
                     <RequireAuth roles={["usuario"]}>
-                        <React.Suspense fallback="Loading...">
+                        <React.Suspense
+                            fallback={<Loading />}
+                        >
                             <UserRoutes />
                         </React.Suspense>
                     </RequireAuth>
@@ -54,7 +85,9 @@ export default function AppRoutes() {
                 path="agente/*"
                 element={
                     <RequireAuth roles={["AgenteInmobiliario"]}>
-                        <React.Suspense fallback="Loading...">
+                        <React.Suspense
+                            fallback={<Loading />}
+                        >
                             <AgentRoutes />
                         </React.Suspense>
                     </RequireAuth>
